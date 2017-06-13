@@ -6,11 +6,7 @@ import java.nio.ByteBuffer;
 
 /**
  * An unknown ZCL message - if we can't parse it, it turns into one of these.
- * <p/>
  * Created by ${USER} on ${DATE}.
- * <p/>
- * <p/>
- * <p/>
  * <pre>
  * (C) Copyright 2015 Christopher Piggott (cpiggott@gmail.com)
  *
