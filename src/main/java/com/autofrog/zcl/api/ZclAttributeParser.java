@@ -1,11 +1,10 @@
 package com.autofrog.zcl.api;
 
-import com.autofrog.zcl.attributes.ZclAttribute;
-import com.autofrog.zcl.attributes.ZclAttributeType;
-import com.autofrog.zcl.attributes.ZclNumberAttribute;
-import com.autofrog.zcl.attributes.ZclUnknownAttribute;
+import com.autofrog.zcl.attributes.*;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ${USER} on ${DATE}.
@@ -88,6 +87,9 @@ public class ZclAttributeParser {
                 buf.get(bTemp, 0, iTemp);
                 return new ZclUnknownAttribute(attributeId, type, bTemp);
 
+            case ARRAY:
+                return parseArray(attributeId, buf);
+
         }
 
         if (type.getLength() == 0) {
@@ -105,5 +107,45 @@ public class ZclAttributeParser {
         } else {
             return null;
         }
+    }
+
+    private static ZclArrayAttribute parseArray(short attributeId, ByteBuffer buf) {
+
+        byte elementTypeNum = buf.get();
+        int elementCount = buf.getShort() & 0xFFFF;
+
+        ZclAttributeType elementTYpe = ZclAttributeType.lookup(elementTypeNum);
+        if (elementTYpe == null) {
+            return null;
+        }
+
+
+        switch(elementTYpe) {
+
+            case UINT16:
+                return parseUINT16Array(attributeId, elementCount, buf);
+            default:
+                return null;
+        }
+    }
+
+    private static ZclNumberArrayAttribute parseUINT16Array(short attributeId, int numExpectedElements, ByteBuffer buf) {
+        int remaining = buf.remaining() / 2;
+        if(remaining != numExpectedElements) {
+            return null;
+        }
+
+        List<Number> numbers = new ArrayList<Number>(numExpectedElements);
+
+        while(buf.hasRemaining()) {
+            int n = buf.getShort() & 0xFFFF;
+            numbers.add(n);
+        }
+
+        return new ZclNumberArrayAttribute(attributeId, numbers);
+
+
+
+
     }
 }
