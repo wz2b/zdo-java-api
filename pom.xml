@@ -11,6 +11,11 @@
     <description>A relatively dependency-free library for parsing very simple zdo/zcl messages</description>
     <url>https://github.com/wz2b/zdo-java-api</url>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <licenses>
         <license>
             <name>LGPL-2.1</name>
@@ -68,6 +73,9 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
             </plugin>
 
 
@@ -102,6 +110,14 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
