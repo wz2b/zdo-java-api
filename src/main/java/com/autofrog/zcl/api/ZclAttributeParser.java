@@ -114,22 +114,24 @@ public class ZclAttributeParser {
         byte elementTypeNum = buf.get();
         int elementCount = buf.getShort() & 0xFFFF;
 
-        ZclAttributeType elementTYpe = ZclAttributeType.lookup(elementTypeNum);
-        if (elementTYpe == null) {
+        ZclAttributeType elementType = ZclAttributeType.lookup(elementTypeNum);
+        if (elementType == null) {
             return null;
         }
 
 
-        switch(elementTYpe) {
+        switch(elementType) {
 
             case UINT16:
-                return parseUINT16Array(attributeId, elementCount, buf);
+                return parseUINT16Array(attributeId, elementType, elementCount, buf);
             default:
                 return null;
         }
     }
 
-    private static ZclNumberArrayAttribute parseUINT16Array(short attributeId, int numExpectedElements, ByteBuffer buf) {
+    private static ZclNumberArrayAttribute parseUINT16Array(short attributeId,
+                                                            ZclAttributeType elementType,
+                                                            int numExpectedElements, ByteBuffer buf) {
         int remaining = buf.remaining() / 2;
         if(remaining != numExpectedElements) {
             return null;
@@ -142,7 +144,7 @@ public class ZclAttributeParser {
             numbers.add(n);
         }
 
-        return new ZclNumberArrayAttribute(attributeId, numbers);
+        return new ZclNumberArrayAttribute(attributeId, elementType, numbers);
 
 
 

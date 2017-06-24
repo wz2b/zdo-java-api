@@ -21,18 +21,12 @@ package com.autofrog.zcl.attributes;
  */
 
 public abstract class ZclAttribute {
-    private final ZclAttributeType type;
     private final short attributeId;
 
-    protected ZclAttribute(short attributeId, ZclAttributeType type) {
+    protected ZclAttribute(short attributeId) {
         this.attributeId = attributeId;
-        this.type = type;
-    }
 
-    public ZclAttributeType getType() {
-        return type;
     }
-
     public short getAttributeId() {
         return attributeId;
     }

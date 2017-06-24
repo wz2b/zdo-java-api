@@ -24,11 +24,13 @@ package com.autofrog.zcl.attributes;
 
 public class ZclUnknownAttribute extends ZclAttribute {
 
+    private final ZclAttributeType attributeType;
     byte[] data;
 
-    public ZclUnknownAttribute(short attributeId, ZclAttributeType type, byte[] bytes) {
-        super(attributeId, type);
+    public ZclUnknownAttribute(short attributeId, ZclAttributeType attributeType, byte[] bytes) {
+        super(attributeId);
         data = bytes;
+        this.attributeType = attributeType;
     }
 
     public byte[] getData() {

@@ -32,41 +32,45 @@ import java.math.BigInteger;
 
 public class ZclNumberAttribute extends ZclAttribute {
 
+    private final ZclAttributeType attributeType;
     private final Number value;
 
-    public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, double value) {
-        super(attributeId, attributeType);
+    protected ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, Number value) {
+        super(attributeId);
+        this.attributeType = attributeType;
         this.value = value;
+
+    }
+    public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, double value) {
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, long value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, int value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, byte value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, short value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, BigInteger value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
     }
 
     public ZclNumberAttribute(short attributeId, ZclAttributeType attributeType, BigDecimal value) {
-        super(attributeId, attributeType);
-        this.value = value;
+        this(attributeId, attributeType, (Number) value);
+    }
+
+    public ZclAttributeType getAttributeType() {
+        return attributeType;
     }
 
     public Number getValue() {

@@ -1,6 +1,5 @@
 package com.autofrog.zcl.attributes;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 /**
@@ -10,16 +9,28 @@ import java.util.List;
  *         Rochester Institute of Technology
  */
 public class ZclNumberArrayAttribute extends ZclArrayAttribute {
-    private final List<Number> numbers;
+    private final List<Number> values;
+    private final ZclAttributeType elementType;
 
-    public ZclNumberArrayAttribute(short attributeId, List<Number> numbers) {
+    public ZclNumberArrayAttribute(short attributeId,
+                                   ZclAttributeType elementType,
+                                   List<Number> numbers) {
         super(attributeId);
-        this.numbers = numbers;
+        this.elementType = elementType;
+        this.values = numbers;
     }
 
 
     public int count() {
-        return numbers.size();
+        return values.size();
     }
 
+    public List<Number> getValuez() {
+        return values;
+    }
+
+
+    public ZclAttributeType getType() {
+        return elementType;
+    }
 }
