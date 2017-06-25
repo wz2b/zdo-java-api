@@ -25,7 +25,7 @@ public class ZclNumberArrayAttribute extends ZclArrayAttribute {
         return values.size();
     }
 
-    public List<Number> getValuez() {
+    public List<Number> getValues() {
         return values;
     }
 
