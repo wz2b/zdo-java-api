@@ -25,9 +25,9 @@ public abstract class ZclAttribute {
 
     protected ZclAttribute(short attributeId) {
         this.attributeId = attributeId;
-
     }
     public short getAttributeId() {
         return attributeId;
     }
+
 }
